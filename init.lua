@@ -6278,7 +6278,9 @@ end
 end
 
 else
+if v ~= nil and v.Visible then
 v.Visible=false
+end
 end
 end)
 
