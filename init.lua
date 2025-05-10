@@ -6270,10 +6270,11 @@ E.Size=UDim2.new(0,22,0,22)
 if ac.Icon(tostring(i.Icon))[1]then
 
 
-
+if v~= nil then
 v.Image=ac.Icon(i.Icon)[1]
 v.ImageRectOffset=ac.Icon(i.Icon)[2].ImageRectPosition
 v.ImageRectSize=ac.Icon(i.Icon)[2].ImageRectSize
+end
 end
 
 else
