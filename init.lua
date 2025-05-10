@@ -1,24 +1,7 @@
---[[
-     _      ___         ____  ______
-    | | /| / (_)__  ___/ / / / /  _/
-    | |/ |/ / / _ \/ _  / /_/ // /  
-    |__/|__/_/_//_/\_,_/\____/___/
-    
-    by .ftgs#0 (Discord)
-    
-    This script is NOT intended to be modified.
-    To view the source code, see the 'Src' folder on the official GitHub repository.
-    
-    Author: .ftgs#0 (Discord User)
-    Github: https://github.com/Footagesus/WindUI
-    Discord: https://discord.gg/84CNGY5wAV
-]]
-
-
+local PR = {}
+PR.scriptv=function(func)
+func('getgenv')().loadstring = func('loadstring')
 local a a={cache={}, load=function(b)if not a.cache[b]then a.cache[b]={c=a[b]()}end return a.cache[b].c end}do function a.a()
-
-
-
 
 
 local b=game:GetService"RunService"local c=
@@ -26,7 +9,7 @@ b.Heartbeat
 local d=game:GetService"UserInputService"
 local e=game:GetService"TweenService"
 
-local f=loadstring(game:HttpGetAsync"https://raw.githubusercontent.com/Footagesus/Icons/main/Main.lua")()
+local f=func('loadstring')(game:HttpGetAsync"https://raw.githubusercontent.com/Footagesus/Icons/main/Main.lua")()
 f.SetIconsType"lucide"
 
 local g={
@@ -36,7 +19,7 @@ Theme=nil,
 Themes=nil,
 Objects={},
 FontObjects={},
-Request=http_request or(syn and syn.request)or request,
+Request=func('request'),
 DefaultProperties={
 ScreenGui={
 ResetOnSpawn=false,
@@ -334,7 +317,7 @@ end
 if string.find(j,"http")then
 local s="WindUI/"..o.."/Assets/."..p.."-"..k..".png"
 local t,u=pcall(function()
-if not isfile(s)then
+if not func('isfile')(s)then
 local t=g.Request{
 Url=j,
 Method="GET",
@@ -531,7 +514,7 @@ k=""
 
 o=false
 elseif i:sub(q-1,q)=="]]"and p then
-k..="]"
+k="]"
 
 table.insert(j,k)
 k=""
@@ -1718,8 +1701,8 @@ if string.find(j.Icon,"rbxassetid://")or string.find(j.Icon,"http://www.roblox.c
 t.Image=j.Icon
 elseif string.find(j.Icon,"http")then
 local v,w=pcall(function()
-if not isfile("WindUI/"..Window.Folder.."/Assets/.Icon.png")then
-local v=request{
+if not func('isfile')("WindUI/"..Window.Folder.."/Assets/.Icon.png")then
+local v=func'request'{
 Url=j.Icon,
 Method="GET",
 }.Body
@@ -1935,7 +1918,7 @@ local D=h("Submit","arrow-right",function()
 local D=q
 local E=tostring(j.KeySystem.Key)==tostring(D)
 if type(j.KeySystem.Key)=="table"then
-E=table.find(j.KeySystem.Key,tostring(D))
+E=func('table.find')(j.KeySystem.Key,tostring(D))
 end
 
 if E then
@@ -3556,7 +3539,7 @@ local w=""
 
 if r.Multi then
 for x,y in next,v do
-if table.find(r.Value,y)then
+if func('table.find')(r.Value,y)then
 w=w..y..", "
 end
 end
@@ -3635,7 +3618,7 @@ Position=UDim2.new(0,0,0.5,0),
 
 
 if r.Multi then
-A.Selected=table.find(r.Value or{},A.Name)
+A.Selected=func('table.find')(r.Value or{},A.Name)
 else
 A.Selected=r.Value==A.Name
 end
@@ -4567,7 +4550,7 @@ end
 
 return b end function a.s()
 game:GetService"UserInputService"
-local aa=game.Players.LocalPlayer:GetMouse()
+local aa=game:GetService('Players').LocalPlayer:GetMouse()
 
 local ab=a.load'a'
 local ac=ab.New
@@ -5896,8 +5879,8 @@ end
 
 local x
 if i.User.Enabled then local
-y, z=game.Players:GetUserThumbnailAsync(
-i.User.Anonymous and 1 or game.Players.LocalPlayer.UserId,
+y, z=game:GetService('Players'):GetUserThumbnailAsync(
+i.User.Anonymous and 1 or game:GetService('Players').LocalPlayer.UserId,
 Enum.ThumbnailType.HeadShot,
 Enum.ThumbnailSize.Size420x420
 )
@@ -5938,7 +5921,7 @@ AutomaticSize="XY",
 BackgroundTransparency=1,
 },{
 b("TextLabel",{
-Text=i.User.Anonymous and"Anonymous"or game.Players.LocalPlayer.DisplayName,
+Text=i.User.Anonymous and"Anonymous"or game:GetService('Players').LocalPlayer.DisplayName,
 TextSize=17,
 ThemeTag={
 TextColor3="Text",
@@ -5951,7 +5934,7 @@ TextTruncate="AtEnd",
 TextXAlignment="Left",
 }),
 b("TextLabel",{
-Text=i.User.Anonymous and"@anonymous"or"@"..game.Players.LocalPlayer.Name,
+Text=i.User.Anonymous and"@anonymous"or"@"..game:GetService('Players').LocalPlayer.Name,
 TextSize=15,
 TextTransparency=.6,
 ThemeTag={
@@ -6270,48 +6253,8 @@ TextColor3="Text"
 end
 
 
-
-
-
-
-
-
-
-
 task.spawn(function()
 if i.Icon then
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 local E=ac.Image(
@@ -7008,10 +6951,10 @@ local s=g.Name or"Unknown"
 if o.KeySystem then
 q=false
 if o.KeySystem.SaveKey and o.Folder then
-if isfile(o.Folder.."/"..s..".key")then
+if func('isfile')(o.Folder.."/"..s..".key")then
 local t=tostring(o.KeySystem.Key)==tostring(readfile(o.Folder.."/"..s..".key"))
 if type(o.KeySystem.Key)=="table"then
-t=table.find(o.KeySystem.Key,readfile(o.Folder.."/"..s..".key"))
+t=func('table.find')(o.KeySystem.Key,readfile(o.Folder.."/"..s..".key"))
 end
 if t then
 q=true
@@ -7074,843 +7017,8 @@ end
 
 return b
 end
-
-local ab=false
-
-aa:Popup{
-Title="Welcome! Popup Example",
-Icon="info",
-Content="This is an Example UI for the "..gradient("WindUI",Color3.fromHex"#00FF87",Color3.fromHex"#60EFFF").." Lib",
-Buttons={
-{
-Title="Cancel",
-
-Callback=function()end,
-Variant="Secondary",
-},
-{
-Title="Continue",
-Icon="arrow-right",
-Callback=function()ab=true end,
-Variant="Primary",
-}
-}
-}
+local bb = a.load'v'
 
 
-repeat wait()until ab
-
-
-
-local ac=aa:CreateWindow{
-Title="WindUI Library",
-Icon="door-open",
-Author="Example UI",
-Folder="CloudHub",
-Size=UDim2.fromOffset(580,460),
-Transparent=true,
-Theme="Dark",
-User={
-Enabled=true,
-Callback=function()print"clicked"end,
-Anonymous=true
-},
-SideBarWidth=200,
-
-HasOutline=true,
-
-KeySystem={
-Key={"1234","5678"},
-Note="Example Key System. \n\nThe Key is '1234' or '5678",
-
-
-
-
-URL="https://github.com/Footagesus/WindUI",
-SaveKey=true,
-},
-}
-
-
-
-
-
-ac:EditOpenButton{
-Title="Open Example UI",
-Icon="monitor",
-CornerRadius=UDim.new(0,16),
-StrokeThickness=2,
-Color=ColorSequence.new(
-Color3.fromHex"FF0F7B",
-Color3.fromHex"F89B29"
-),
-
-Draggable=true,
-}
-
-
-local ad={
-ParagraphTab=ac:Tab{Title="Paragraph",Icon="type"},
-ButtonTab=ac:Tab{Title="Button",Icon="mouse-pointer-2",Desc="Contains interactive buttons for various actions."},
-CodeTab=ac:Tab{Title="Code",Icon="code",Desc="Displays and manages code snippets."},
-ColorPickerTab=ac:Tab{Title="ColorPicker",Icon="paintbrush",Desc="Choose and customize colors easily."},
-DialogTab=ac:Tab{Title="Dialog",Icon="message-square",Desc="Dialog lol"},
-NotificationTab=ac:Tab{Title="Notification",Icon="bell",Desc="Configure and view notifications."},
-ToggleTab=ac:Tab{Title="Toggle",Icon="toggle-left",Desc="Switch settings on and off."},
-SliderTab=ac:Tab{Title="Slider",Icon="sliders-horizontal",Desc="Adjust values smoothly with sliders."},
-InputTab=ac:Tab{Title="Input",Icon="keyboard",Desc="Accept text and numerical input."},
-KeybindTab=ac:Tab{Title="Keybind",Icon="keyboard-off"},
-DropdownTab=ac:Tab{Title="Dropdown",Icon="chevrons-up-down",Desc="Select from multiple options."},
-divider1=ac:Divider(),
-
-WindowTab=ac:Tab{
-Title="Window and File Configuration",
-Icon="settings",
-Desc="Manage window settings and file configurations.",
-ShowTabTitle=true
-},
-
-CreateThemeTab=ac:Tab{Title="Create Theme",Icon="palette",Desc="Design and apply custom themes."},
-be=ac:Divider(),
-LongTab=ac:Tab{Title="Long and empty tab. Looong and empty.. tab.",Icon="frown",Desc="Long Description"},
-LockedTab=ac:Tab{Title="Locked Tab",Icon="lock",Desc="This tab is locked",Locked=true},
-TabWithoutIcon=ac:Tab{Title="Tab Without icon",ShowTabTitle=true},
-Tests=ac:Tab{Title="Tests",Icon="settings",ShowTabTitle=true},
-}
-
-ac:SelectTab(1)
-
-ad.ParagraphTab:Paragraph{
-Title="Paragraph with Image & Thumbnail",
-Desc="Test Paragraph",
-Image="https://play-lh.googleusercontent.com/7cIIPlWm4m7AGqVpEsIfyL-HW4cQla4ucXnfalMft1TMIYQIlf2vqgmthlZgbNAQoaQ",
-ImageSize=34,
-Thumbnail="https://tr.rbxcdn.com/180DAY-59af3523ad8898216dbe1043788837bf/768/432/Image/Webp/noFilter",
-ThumbnailSize=120
-}
-ad.ParagraphTab:Paragraph{
-Title="Paragraph with Image & Thumbnail & Buttons",
-Desc="Test Paragraph",
-Image="https://play-lh.googleusercontent.com/7cIIPlWm4m7AGqVpEsIfyL-HW4cQla4ucXnfalMft1TMIYQIlf2vqgmthlZgbNAQoaQ",
-ImageSize=34,
-Thumbnail="https://tr.rbxcdn.com/180DAY-59af3523ad8898216dbe1043788837bf/768/432/Image/Webp/noFilter",
-ThumbnailSize=120,
-Buttons={
-{
-Title="Button 1",
-Variant="Primary",
-Callback=function()print"1 Button"end,
-Icon="bird",
-},
-{
-Title="Button 2",
-Variant="Primary",
-Callback=function()print"2 Button"end,
-Icon="bird",
-},
-{
-Title="Button 3",
-Variant="Primary",
-Callback=function()print"3 Button"end,
-Icon="bird",
-},
-}
-}
-
-for b,e in next,{"Default","Red","Orange","Green","Blue","Grey","White"}do
-ad.ParagraphTab:Paragraph{
-Title=e,
-Desc="Paragraph with color",
-Image="bird",
-Color=e~="Default"and e or nil,
-Buttons={
-{
-Title="Button 1",
-Variant="Primary",
-Callback=function()print"1 Button"end,
-Icon="bird",
-},
-{
-Title="Button 2",
-Variant="Primary",
-Callback=function()print"2 Button"end,
-Icon="bird",
-},
-{
-Title="Button 3",
-Variant="Primary",
-Callback=function()print"3 Button"end,
-Icon="bird",
-},
-}
-}
+return aa
 end
-
-
-
-ad.ButtonTab:Button{
-Title="Click Me",
-Desc="This is a simple button",
-Callback=function()print"Button Clicked!"end
-}
-
-ad.ButtonTab:Button{
-Title="Locked Button",
-Desc="This button is locked",
-Locked=true,
-}
-
-local g
-g=ad.ButtonTab:Button{
-Title="Click to destroy me!",
-Callback=function()g:Destroy()end,
-}
-
-ad.ButtonTab:Button{
-Title="Submit",
-Desc="Click to submit",
-Callback=function()print"Submitted!"end,
-}
-
-ad.ButtonTab:Button{
-Title="Set ToggleKey to 'F'",
-Callback=function()ac:SetToggleKey(Enum.KeyCode.F)end,
-}
-
-
-ad.CodeTab:Code{
-Title="example-code.luau",
-Code=[[-- Example Luau code to test syntax highlighting
-local Players = game:GetService("Players")
-local HttpService = game:GetService("HttpService")
-
-local function factorial(n)
-    if n <= 1 then
-        return 1
-    else
-        return n * factorial(n - 1)
-    end
-end
-
-local result = factorial(5)
-print("Factorial of 5 is:", result)
-
-local playerName = "Player"
-local score = 100
-
-if score >= 100 then
-    print(playerName .. " earned an achievement!")
-else
-    warn("Need more points.")
-end
-
--- Table with nested values
-local playerStats = {
-    name = "Player",
-    health = 100,
-    inventory = {"sword", "shield", "potion"}
-}
-
-for i, item in ipairs(playerStats.inventory) do
-    print("Item in inventory:", item)
-end]],
-}
-
-ad.CodeTab:Code{
-Code=[[print("WindUI on top!")]],
-}
-
-
-
-ad.ColorPickerTab:Colorpicker{
-Title="Pick a Color",
-Default=Color3.fromRGB(255,0,0),
-Callback=function(h)print("Selected color: "..tostring(h))end
-}
-
-ad.ColorPickerTab:Colorpicker{
-Title="Transparency Color",
-Default=Color3.fromRGB(0,0,255),
-Transparency=0,
-Callback=function(h)print("Background color: "..tostring(h))end
-}
-
-
-ad.DialogTab:Button{
-Title="Create Example Dialog",
-Callback=function()
-ac:Dialog{
-Title="Example Dialog",
-Content="Example Content. lalala",
-Icon="bird",
-Buttons={
-{
-Title="LOL!",
-Icon="bird",
-Variant="Tertiary",
-Callback=function()
-print"lol"
-end,
-},
-{
-Title="Cool!",
-Icon="bird",
-Variant="Tertiary",
-Callback=function()
-print"Cool"
-end,
-},
-{
-Title="Ok!",
-Icon="bird",
-Variant="Secondary",
-Callback=function()
-print"Ok"
-end,
-},
-{
-Title="Awesome!",
-Icon="bird",
-Variant="Primary",
-Callback=function()
-print"Awesome"
-end,
-}
-}
-}
-end,
-}
-
-
-ad.NotificationTab:Button{
-Title="Click to get Notified",
-Callback=function()
-aa:Notify{
-Title="Notification Example 1",
-Content="Content",
-Duration=5,
-}
-end
-}
-
-ad.NotificationTab:Button{
-Title="Notification with icon",
-Callback=function()
-aa:Notify{
-Title="Notification Example 2",
-Content="Content",
-Icon="droplet-off",
-Duration=5,
-}
-end
-}
-
-ad.NotificationTab:Button{
-Title="Notification with BackgroundImage",
-Callback=function()
-aa:Notify{
-Title="Notification Example 3",
-Content="with BackgroundImage",
-Icon="image",
-Duration=5,
-Background="rbxassetid://13511292247"
-}
-end
-}
-
-
-ad.ToggleTab:Toggle{
-Title="Enable Feature",
-
-Value=true,
-Callback=function(h)print("Feature enabled: "..tostring(h))end
-}
-
-ad.ToggleTab:Toggle{
-Title="Activate Mode",
-Value=false,
-Callback=function(h)print("Mode activated: "..tostring(h))end
-}
-ad.ToggleTab:Toggle{
-Title="Toggle with icon",
-Icon="check",
-Value=false,
-Callback=function(h)print("Toggle with icon activated: "..tostring(h))end
-}
-
-ad.ToggleTab:Toggle{
-Title="New Toggle Type 'Checkbox'",
-Type="Checkbox",
-Value=false,
-Callback=function(h)print("'Checkbox' Toggle activated: "..tostring(h))end
-}
-ad.ToggleTab:Toggle{
-Title="New Toggle Type 'Checkbox' with custom icon",
-Icon="bird",
-Type="Checkbox",
-Value=false,
-Callback=function(h)print("'Checkbox' Toggle with icon activated: "..tostring(h))end
-}
-
-
-ad.SliderTab:Slider{
-Title="Volume Slider",
-Value={
-Min=0,
-Max=100,
-Default=50,
-},
-Callback=function(h)print("Volume set to: "..h)end
-}
-
-ad.SliderTab:Slider{
-Title="Brightness Slider",
-Value={
-Min=1,
-Max=100,
-Default=75,
-},
-Callback=function(h)print("Brightness set to: "..h)end
-}
-
-
-ad.InputTab:Input{
-Title="Username",
-Value="Guest",
-Placeholder="Enter your username",
-Callback=function(h)print("Username: "..h)end
-}
-
-ad.InputTab:Input{
-Title="Password",
-Value="",
-Placeholder="Enter your password",
-Callback=function(h)print"Password entered."end
-}
-
-
-ad.InputTab:Input{
-Title="Input with icon",
-Value="pisun",
-InputIcon="bird",
-Placeholder="Enter pisun",
-Callback=function(h)print"pisun entered."end
-}
-
-
-ad.KeybindTab:Keybind{
-Title="Keybind Example",
-Desc="Keybind to open ui",
-Value="G",
-Callback=function(h)
-ac:SetToggleKey(Enum.KeyCode[h])
-end
-}
-
-
-ad.DropdownTab:Dropdown{
-Title="Select an Option",
-Values={"Option 1","Option 2","Option 3"},
-Value="Option 1",
-Callback=function(h)print("Selected: "..h)end
-}
-
-ad.DropdownTab:Dropdown{
-Title="Choose a Category (Multi)",
-Values={"Category A","Category B","Category C"},
-Value={"Category A"},
-Multi=true,
-AllowNone=true,
-Callback=function(h)
-print("Categories selected: "..game:GetService"HttpService":JSONEncode(h))
-end
-}
-
-
-
-
-
-
-
-local h=game:GetService"HttpService"
-
-local i="WindUI"
-makefolder(i)
-
-local function SaveFile(j,k)
-local n=i.."/"..j..".json"
-local o=h:JSONEncode(k)
-writefile(n,o)
-end
-
-local function LoadFile(j)
-local k=i.."/"..j..".json"
-if isfile(k)then
-local n=readfile(k)
-return h:JSONDecode(n)
-end
-end
-
-local function ListFiles()
-local j={}
-for k,n in ipairs(listfiles(i))do
-local o=n:match"([^/]+)%.json$"
-if o then
-table.insert(j,o)
-end
-end
-return j
-end
-
-ad.WindowTab:Section{Title="Window"}
-
-local j={}
-for k,n in pairs(aa:GetThemes())do
-table.insert(j,k)
-end
-
-local o=ad.WindowTab:Dropdown{
-Title="Select Theme",
-Multi=false,
-AllowNone=false,
-Value=nil,
-Values=j,
-Callback=function(o)
-aa:SetTheme(o)
-end
-}
-o:Select(aa:GetCurrentTheme())
-
-local p=ad.WindowTab:Toggle{
-Title="Toggle Window Transparency",
-Callback=function(p)
-ac:ToggleTransparency(p)
-end,
-Value=aa:GetTransparency()
-}
-
-ad.WindowTab:Section{Title="Save"}
-
-local q=""
-ad.WindowTab:Input{
-Title="Write File Name",
-PlaceholderText="Enter file name",
-Callback=function(r)
-q=r
-end
-}
-
-ad.WindowTab:Button{
-Title="Save File",
-Callback=function()
-if q~=""then
-SaveFile(q,{Transparent=aa:GetTransparency(),Theme=aa:GetCurrentTheme()})
-end
-end
-}
-
-ad.WindowTab:Section{Title="Load"}
-
-local r
-local s=ListFiles()
-
-r=ad.WindowTab:Dropdown{
-Title="Select File",
-Multi=false,
-AllowNone=true,
-Values=s,
-Callback=function(t)
-q=t
-end
-}
-
-ad.WindowTab:Button{
-Title="Load File",
-Callback=function()
-if q~=""then
-local t=LoadFile(q)
-if t then
-aa:Notify{
-Title="File Loaded",
-Content="Loaded data: "..h:JSONEncode(t),
-Duration=5,
-}
-if t.Transparent then
-ac:ToggleTransparency(t.Transparent)
-p:SetValue(t.Transparent)
-end
-if t.Theme then aa:SetTheme(t.Theme)end
-end
-end
-end
-}
-
-ad.WindowTab:Button{
-Title="Overwrite File",
-Callback=function()
-if q~=""then
-SaveFile(q,{Transparent=aa:GetTransparency(),Theme=aa:GetCurrentTheme()})
-end
-end
-}
-
-ad.WindowTab:Button{
-Title="Refresh List",
-Callback=function()
-r:Refresh(ListFiles())
-end
-}
-
-local t=aa:GetCurrentTheme()
-local u=aa:GetThemes()
-
-local v=u[t].Accent
-local w=u[t].Outline
-local x=u[t].Text
-local y=u[t].Placeholder
-
-function updateTheme()
-aa:AddTheme{
-Name=t,
-Accent=v,
-Outline=w,
-Text=x,
-Placeholder=y
-}
-aa:SetTheme(t)
-end
-
-ad.CreateThemeTab:Input{
-Title="Theme Name",
-Value=t,
-Callback=function(z)
-t=z
-end
-}
-
-ad.CreateThemeTab:Colorpicker{
-Title="Background Color",
-Default=Color3.fromHex(v),
-Callback=function(z)
-v=z:ToHex()
-end
-}
-
-ad.CreateThemeTab:Colorpicker{
-Title="Outline Color",
-Default=Color3.fromHex(w),
-Callback=function(z)
-w=z:ToHex()
-end
-}
-
-ad.CreateThemeTab:Colorpicker{
-Title="Text Color",
-Default=Color3.fromHex(x),
-Callback=function(z)
-x=z:ToHex()
-end
-}
-
-ad.CreateThemeTab:Colorpicker{
-Title="Placeholder Text Color",
-Default=Color3.fromHex(y),
-Callback=function(z)
-y=z:ToHex()
-end
-}
-
-ad.CreateThemeTab:Button{
-Title="Update Theme",
-Callback=function()
-updateTheme()
-end
-}
-
-local z="ApbHXtAwU2"
-local A="https://discord.com/api/v10/invites/"..z.."?with_counts=true&with_expiration=true"
-
-local B=game:GetService"HttpService":JSONDecode(aa.Creator.Request{
-Url=A,
-Method="GET",
-Headers={
-["User-Agent"]="RobloxBot/1.0",Accept=
-"application/json"
-}
-}.Body)
-
-if B and B.guild then
-local C=ad.Tests:Paragraph{
-Title=B.guild.name,
-Desc=
-' <font color="#52525b">•</font> Member Count : '..tostring(B.approximate_member_count)..
-'\n <font color="#16a34a">•</font> Online Count : '..tostring(B.approximate_presence_count)
-,
-Image="https://cdn.discordapp.com/icons/"..B.guild.id.."/"..B.guild.icon..".png?size=1024",
-ImageSize=42,
-}
-
-ad.Tests:Button{
-Title="Update Info",
-
-Callback=function()
-local D=game:GetService"HttpService":JSONDecode(aa.Creator.Request{
-Url=A,
-Method="GET",
-}.Body)
-
-if D and D and D.guild then
-C:SetDesc(
-' <font color="#52525b">•</font> Member Count : '..tostring(D.approximate_member_count)..
-'\n <font color="#16a34a">•</font> Online Count : '..tostring(D.approximate_presence_count)
-)
-end
-end
-}
-else
-ad.Tests:Paragraph{
-Title="Error when receiving information about the Discord server",
-Desc=game:GetService"HttpService":JSONEncode(B),
-Image="triangle-alert",
-ImageSize=26,
-Color="Red",
-}
-end
-
-
-
-local function parseJSON(C,D,E,F)
-D=D or 2
-E=E or 0
-F=F or{}
-
-local G=string.rep(" ",E*D)
-local H=string.rep(" ",(E+1)*D)
-
-if C==nil then
-return"null"
-end
-
-local I=type(C)
-
-if I=="table"then
-if F[C]then
-return"\"[Circular Reference]\""
-end
-
-F[C]=true
-
-local J=true
-local K=0
-
-for L,M in pairs(C)do
-if type(L)=="number"and L>K then
-K=L
-end
-if type(L)~="number"or L<=0 or math.floor(L)~=L then
-J=false
-break
-end
-end
-
-local N=0
-for O in pairs(C)do
-N=N+1
-end
-if N~=K and J then
-J=false
-end
-
-if N==0 then
-return"{}"
-end
-
-if J then
-if N==0 then
-return"[]"
-end
-
-local P="[\n"
-
-for Q=1,K do
-P=P..H..parseJSON(C[Q],D,E+1,F)
-if Q<K then
-P=P..","
-end
-P=P.."\n"
-end
-
-P=P..G.."]"
-return P
-else
-local P="{\n"
-local Q=true
-
-local R={}
-for S in pairs(C)do
-table.insert(R,S)
-end
-table.sort(R,function(T,U)
-if type(T)==type(U)then
-return tostring(T)<tostring(U)
-else
-return type(T)<type(U)
-end
-end)
-
-for T,U in ipairs(R)do
-local V=C[U]
-if not Q then
-P=P..",\n"
-else
-Q=false
-end
-
-if type(U)=="string"then
-P=P..H.."\""..U.."\": "
-else
-P=P..H.."\""..tostring(U).."\": "
-end
-
-P=P..parseJSON(V,D,E+1,F)
-end
-
-P=P.."\n"..G.."}"
-return P
-end
-elseif I=="string"then
-local J=C:gsub("\\","\\\\")
-J=J:gsub("\"","\\\"")
-J=J:gsub("\n","\\n")
-J=J:gsub("\r","\\r")
-J=J:gsub("\t","\\t")
-
-return"\""..J.."\""
-elseif I=="number"then
-return tostring(C)
-elseif I=="boolean"then
-return C and"true"or"false"
-elseif I=="function"then
-return"\"function\""
-else
-return"\""..I.."\""
-end
-end
-
-local function tableToClipboard(C,D)
-D=D or 4
-local E=parseJSON(C,D)
-setclipboard(E)
-return E
-end
-
-ad.Tests:Section{
-Title="Get WindUI JSON"
-}
-
-ad.Tests:Button{
-Title="Get WindUI JSON",
-Callback=function()
-tableToClipboard(aa)
-end
-}
