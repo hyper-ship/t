@@ -323,7 +323,7 @@ Url=j,
 Method="GET",
 }.Body
 
-writefile(s,t)
+func('writefile')(s,t)
 end
 r.ImageLabel.Image=getcustomasset(s)
 end)
@@ -1706,7 +1706,7 @@ local v=func'request'{
 Url=j.Icon,
 Method="GET",
 }.Body
-writefile("WindUI/"..Window.Folder.."/Assets/.Icon.png",v)
+func('writefile')("WindUI/"..Window.Folder.."/Assets/.Icon.png",v)
 end
 t.Image=getcustomasset("WindUI/"..Window.Folder.."/Assets/.Icon.png")
 end)
@@ -1926,7 +1926,7 @@ p:Close()()
 
 if j.KeySystem.SaveKey then
 local F=j.Folder or j.Title
-writefile(F.."/"..k..".key",tostring(D))
+func('writefile')(F.."/"..k..".key",tostring(D))
 end
 
 task.wait(.4)
@@ -6955,9 +6955,9 @@ if o.KeySystem then
 q=false
 if o.KeySystem.SaveKey and o.Folder then
 if func('isfile')(o.Folder.."/"..s..".key")then
-local t=tostring(o.KeySystem.Key)==tostring(readfile(o.Folder.."/"..s..".key"))
+local t=tostring(o.KeySystem.Key)==tostring(func('readfile')(o.Folder.."/"..s..".key"))
 if type(o.KeySystem.Key)=="table"then
-t=func('table.find')(o.KeySystem.Key,readfile(o.Folder.."/"..s..".key"))
+t=func('table.find')(o.KeySystem.Key,func('readfile')(o.Folder.."/"..s..".key"))
 end
 if t then
 q=true
