@@ -6993,33 +6993,6 @@ return aa end end
 local aa=a.load'v'
 
 
-
-
-
-
-
-
-
-
-function gradient(ab,ac,ad)
-local b=""
-local e=#ab
-
-for g=1,e do
-local h=(g-1)/math.max(e-1,1)
-local i=math.floor((ac.R+(ad.R-ac.R)*h)*255)
-local j=math.floor((ac.G+(ad.G-ac.G)*h)*255)
-local k=math.floor((ac.B+(ad.B-ac.B)*h)*255)
-
-local n=ab:sub(g,g)
-b=b.."<font color=\"rgb("..i..", "..j..", "..k..")\">"..n.."</font>"
-end
-
-return b
-end
-local bb = a.load'v'
-
-
 return aa
 end
 
